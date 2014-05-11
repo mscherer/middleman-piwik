@@ -16,7 +16,7 @@ module Middleman
 
         def insert_piwik_tracker_js
             <<END
-        <script type="test/javascript">
+        <script type="text/javascript">
         var _paq = _paq || [];
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
