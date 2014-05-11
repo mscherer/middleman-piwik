@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.authors = ["Michael Scherer"]
   s.email = ["mscherer@redhat.com"]
-  s.homepage = "https://github.com/OSAS/middleman-piwik"
+  s.homepage = "https://github.com/mscherer/middleman-piwik"
   s.summary = %q{Piwik tracker integration for Middleman}
   s.description = %q{Piwik tracker integration for Middleman}
   s.license = "MIT"
