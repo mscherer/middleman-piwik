@@ -11,7 +11,7 @@ module Middleman
 
       helpers do
         def insert_piwik_tracker_img
-            "<noscript><p><img src=\"https://#{piwik_domain}/piwik.php?idsite=#{piwik_id}\" style=\"border:0;\" alt=\"\" /></p></noscript>"
+            "<p><img src=\"https://#{piwik_domain}/piwik.php?idsite=#{piwik_id}\" style=\"border:0;\" alt=\"\" /></p>"
         end
 
         def insert_piwik_tracker_js
@@ -32,7 +32,7 @@ END
         end
 
         def insert_piwik_tracker
-            insert_piwik_tracker_js + insert_piwik_tracker_img
+            insert_piwik_tracker_js + "<noscript>" + insert_piwik_tracker_img + "</noscript>"
         end
       end
     end
