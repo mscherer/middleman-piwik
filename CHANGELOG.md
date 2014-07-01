@@ -1,3 +1,9 @@
+0.2.0
+-----
+
+* Add a url option, so we can use piwik installed in another location than the 
+root of the web server.
+
 0.1.1
 -----
 
