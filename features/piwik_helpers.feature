@@ -7,11 +7,12 @@ Feature: Piwik helpers for js and img.
       activate :piwik do |f|
         f.id = 3
         f.domain = 'piwik.example.com'
+        f.url = '/piwik2.2/'
       end
       """
     Given the Server is running at "test-app"
     When I go to "/piwik_both.html"
-    Then I should see "piwik.example.com/piwik.php?idsite=3"
+    Then I should see "piwik.example.com/piwik2.2/piwik.php?idsite=3"
     Then I should see "setSiteId"
     Then I should see "noscript"
 
@@ -42,3 +43,31 @@ Feature: Piwik helpers for js and img.
     When I go to "/piwik_js.html"
     Then I should not see "noscript"
     Then I should see 'setSiteId'
+
+  Scenario: Helpers without trailing slash
+    Given a fixture app "test-app"
+    And a file named "config.rb" with:
+      """
+      activate :piwik do |f|
+        f.id = 6
+        f.domain = 'piwik.example.com'
+        f.url = 'piwik2.2'
+      end
+      """
+    Given the Server is running at "test-app"
+    When I go to "/piwik_both.html"
+    Then I should see "piwik.example.com/piwik2.2/piwik.php?idsite=6"
+
+  Scenario: Helpers with extra trailing slash
+    Given a fixture app "test-app"
+    And a file named "config.rb" with:
+      """
+      activate :piwik do |f|
+        f.id = 7
+        f.domain = 'piwik.example.com'
+        f.url = '////piwik2.2////'
+      end
+      """
+    Given the Server is running at "test-app"
+    When I go to "/piwik_both.html"
+    Then I should see "piwik.example.com/piwik2.2/piwik.php?idsite=7"

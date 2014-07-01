@@ -3,15 +3,19 @@ module Middleman
     class PiwikExtension < Extension
       option :id, 1, 'Piwik site id'
       option :domain, 'piwik.example.org', 'Piwik domain'
+      option :url, '', 'Piwik location'
       
       def after_configuration
         app.set :piwik_domain, options.domain
         app.set :piwik_id, options.id
+        url = '/' + options.url + '/'
+        url.sub!(/^\/*/,'/').sub!(/\/*$/,'/')
+        app.set :piwik_url, url
       end
 
       helpers do
         def insert_piwik_tracker_img
-            "<p><img src=\"https://#{piwik_domain}/piwik.php?idsite=#{piwik_id}\" style=\"border:0;\" alt=\"\" /></p>"
+            "<p><img src=\"https://#{piwik_domain}#{piwik_url}piwik.php?idsite=#{piwik_id}\" style=\"border:0;\" alt=\"\" /></p>"
         end
 
         def insert_piwik_tracker_js
@@ -21,7 +25,7 @@ module Middleman
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://#{piwik_domain}/";
+        var u=(("https:" == document.location.protocol) ? "https" : "http") + "://#{piwik_domain}#{piwik_url}";
         _paq.push(['setTrackerUrl', u+'piwik.php']);
         _paq.push(['setSiteId', #{piwik_id}]);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';

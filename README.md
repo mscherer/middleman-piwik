@@ -12,12 +12,15 @@ Just add `gem "middleman-piwik"` to your existing Gemfile and run `bundle instal
 activate :piwik do |p|
     p.id = 1
     p.domain = 'piwik.example.net'
+    p.url = '/piwik'
 end
 ``` 
 
 id is the id of the site, as given by piwik. Usually, it start at 1.
 
 domain is the domain name of the piwik server. 
+
+url is the url of the piwik installation. By default, it take the root of the website.
 
 ## Helper
 
